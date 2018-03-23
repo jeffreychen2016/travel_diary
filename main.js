@@ -31,3 +31,35 @@ const travel_diary = [
     }
 ];
 
+const writeToDom = (string,id) => {
+    document.getElementById(id).innerHTML += string;
+}
+
+const createCards = (travel_diary) => {
+    let cards = '';
+    for(let i = 0; i < travel_diary.length; i++){
+        cards += `<div class="card">`;
+        cards +=    `<h2>${travel_diary[i].location}</h2>`;
+        cards +=    `<img src="${travel_diary[i].path}" alt="${travel_diary[i].location}" class="location-img">`;
+        cards +=    `<div class="description">`;
+        cards +=        `<p>${travel_diary[i].description}</p>`;
+        cards +=    `</div>`;
+        cards +=    `<textarea cols="30" rows="7"></textarea>`;
+        cards +=    `<button class="submit-btn">Submit</button>`;
+        cards += `</div>`;
+    }
+    cards += `<div id='output-wrapper'></div>`;
+    writeToDom(cards,'card-holder');
+}
+
+createCards(travel_diary);
+
+const allSubmitBtns = document.getElementsByClassName('submit-btn');
+for(let i = 0; i < allSubmitBtns.length; i++){
+    allSubmitBtns[i].addEventListener('click',(e)=>{
+        let userInput = e.target.parentNode.childNodes[3].value;
+        let outputString = `<div class='output'>${userInput}</div>`
+        writeToDom(outputString,'output-wrapper');
+    });
+}
+
