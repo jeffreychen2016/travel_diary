@@ -74,11 +74,14 @@ const getTimeStamp = () => {
     return today;
 };
 
+const getUserInput = target => target.parentNode.childNodes[3].value; 
+const getCardLocation = target => target.parentNode.childNodes[0].innerHTML;
+
 const allSubmitBtns = document.getElementsByClassName('submit-btn');
 for(let i = 0; i < allSubmitBtns.length; i++){
     allSubmitBtns[i].addEventListener('click',(e)=>{
-        let userInput = e.target.parentNode.childNodes[3].value;
-        let cardLocation = e.target.parentNode.childNodes[0].innerHTML;
+        let userInput = getUserInput(e.target);
+        let cardLocation = getCardLocation(e.target);
         let outputString = '';
         outputString += `<div class='output'>`;
         outputString +=     `<h2 class='card-location'>${cardLocation}</h2>`;
@@ -92,6 +95,8 @@ for(let i = 0; i < allSubmitBtns.length; i++){
         writeToDom(outputString,'output-wrapper');
     });
 }
+
+
 
 
 
