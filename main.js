@@ -54,13 +54,37 @@ const createCards = (travel_diary) => {
 
 createCards(travel_diary);
 
+const getTimeStamp = () => {
+    let today = new Date();
+    let ss = today.getSeconds();
+    let min = today.getMinutes();
+    let HH = today.getHours();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1;
+    let yyyy = today.getFullYear();
+
+    if(mm<10){
+        mm = `0${mm}`;
+    };
+
+    if(ss<10){
+        ss = `0${ss}`;
+    }
+    today = `${mm}/${dd}/${yyyy} ${HH}:${min}:${ss}`;
+    return today;
+};
+
 const allSubmitBtns = document.getElementsByClassName('submit-btn');
 for(let i = 0; i < allSubmitBtns.length; i++){
     allSubmitBtns[i].addEventListener('click',(e)=>{
         let userInput = e.target.parentNode.childNodes[3].value;
         let cardLocation = e.target.parentNode.childNodes[0].innerHTML;
-        let outputString = `<div class='output'><h2 class='card-location'>${cardLocation}</h2>${userInput}</div>`
+        let outputString = '';
+        outputString += `<div class='output'>`;
+        outputString +=     `<h2 class='card-location'>${cardLocation}</h2>`;
+        outputString +=     `<h2 class='card-time'>${getTimeStamp()}</h2>`;
+        outputString +=     `<p class='card-p'>${userInput}</p>`;
+        outputString += `</div>`;
         writeToDom(outputString,'output-wrapper');
     });
 }
-

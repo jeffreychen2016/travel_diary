@@ -86,5 +86,25 @@ button{
 
 .card-location{
     text-align: left;
+    display: inline-block;
+    width: 40%;
+    float: left;
 }
+
+.card-time{
+    text-align: right;
+    display: inline-block;
+    width: 40%;
+    float: right;
+}
+
+.card-p{
+    clear: both;
+}
+
+/* .card-p{
+    display: block;
+    width: 90%;
+    clear: both;
+} */
 
