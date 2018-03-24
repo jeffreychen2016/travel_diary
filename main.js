@@ -58,7 +58,8 @@ const allSubmitBtns = document.getElementsByClassName('submit-btn');
 for(let i = 0; i < allSubmitBtns.length; i++){
     allSubmitBtns[i].addEventListener('click',(e)=>{
         let userInput = e.target.parentNode.childNodes[3].value;
-        let outputString = `<div class='output'>${userInput}</div>`
+        let cardLocation = e.target.parentNode.childNodes[0].innerHTML;
+        let outputString = `<div class='output'><h2 class='card-location'>${cardLocation}</h2>${userInput}</div>`
         writeToDom(outputString,'output-wrapper');
     });
 }
