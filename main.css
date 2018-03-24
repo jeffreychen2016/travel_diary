@@ -26,7 +26,7 @@ h1{
     justify-content: space-evenly;
     flex-wrap: wrap;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .card{
@@ -67,13 +67,14 @@ button{
     border-radius: 6px;
     width: 30%;
     height: 30px;
+    max-width: 115px;
 }
 
 /*----------------- Output -----------------*/
 #output-wrapper{
     /* border: 2px solid black; */
     width: 80%;
-    height: 300px;
+    /* height: 300px; */
 }
 
 .output{
@@ -82,29 +83,41 @@ button{
     width: 90%;
     height: 100px;  
     margin: 10px auto;
+    position: relative;
 }
 
 .card-location{
     text-align: left;
-    display: inline-block;
+    display: block;
     width: 40%;
     float: left;
-}
+} 
 
 .card-time{
     text-align: right;
-    display: inline-block;
+    display: block;
     width: 40%;
     float: right;
 }
 
 .card-p{
-    clear: both;
-}
-
-/* .card-p{
     display: block;
     width: 90%;
     clear: both;
-} */
+    text-indent: 0%;
+}
+
+.edit-btn,
+.delete-btn{
+    display: inline-block;
+}
+
+.output-btn-wrapper{
+    width: 30%;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 

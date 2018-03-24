@@ -84,7 +84,15 @@ for(let i = 0; i < allSubmitBtns.length; i++){
         outputString +=     `<h2 class='card-location'>${cardLocation}</h2>`;
         outputString +=     `<h2 class='card-time'>${getTimeStamp()}</h2>`;
         outputString +=     `<p class='card-p'>${userInput}</p>`;
+        outputString +=     `<div class='output-btn-wrapper'>`;
+        outputString +=         `<button class='edit-btn'>Edit</button>`;
+        outputString +=         `<button class='delete-btn'>Delete</button>`;
+        outputString +=     `</div>`;
         outputString += `</div>`;
         writeToDom(outputString,'output-wrapper');
     });
 }
+
+
+
+
