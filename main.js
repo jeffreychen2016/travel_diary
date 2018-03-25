@@ -35,6 +35,10 @@ const writeToDom = (string,id) => {
     document.getElementById(id).innerHTML += string;
 }
 
+const truncateText = (string,start,length) => {
+    return string.substring(start,length) + '...';
+}
+
 const createCards = (travel_diary) => {
     let cards = '';
     for(let i = 0; i < travel_diary.length; i++){
@@ -42,7 +46,7 @@ const createCards = (travel_diary) => {
         cards +=    `<h2>${travel_diary[i].location}</h2>`;
         cards +=    `<img src="${travel_diary[i].path}" alt="${travel_diary[i].location}" class="location-img">`;
         cards +=    `<div class="description">`;
-        cards +=        `<p>${travel_diary[i].description}</p>`;
+        cards +=        `<p>${truncateText(travel_diary[i].description,0,150)}</p>`;
         cards +=    `</div>`;
         cards +=    `<textarea cols="30" rows="7"></textarea>`;
         cards +=    `<button class="submit-btn">Submit</button>`;
@@ -74,11 +78,26 @@ const getTimeStamp = () => {
     return today;
 };
 
+const getUserInput = (target,index) => {
+    let userInput = target.parentNode.childNodes[index].value;
+    return userInput; 
+}
+
+const getCardLocation = (target,index) => {
+    let cardLocation = target.parentNode.childNodes[index].innerHTML;
+    return cardLocation;
+}
+
+const changeColor = (e) => {
+    let title = e.target.parentNode.childNodes[0];
+    title.classList.add('submit-once');
+}
+
 const allSubmitBtns = document.getElementsByClassName('submit-btn');
 for(let i = 0; i < allSubmitBtns.length; i++){
     allSubmitBtns[i].addEventListener('click',(e)=>{
-        let userInput = e.target.parentNode.childNodes[3].value;
-        let cardLocation = e.target.parentNode.childNodes[0].innerHTML;
+        let userInput = getUserInput(e.target,3);
+        let cardLocation = getCardLocation(e.target,0);
         let outputString = '';
         outputString += `<div class='output'>`;
         outputString +=     `<h2 class='card-location'>${cardLocation}</h2>`;
@@ -90,8 +109,49 @@ for(let i = 0; i < allSubmitBtns.length; i++){
         outputString +=     `</div>`;
         outputString += `</div>`;
         writeToDom(outputString,'output-wrapper');
+        changeColor(e);
     });
 }
+
+const deleteEntry = (e) => {
+    let outputBox = e.target.parentNode.parentNode;
+    if(e.target.classList[0] === 'delete-btn'){
+        outputBox.style.display = 'none'; 
+    }
+}
+
+//attached the event listener to the parent of all output buttons
+//becuase if attach it to the button itself, the newly added output will NOT be having event listener.
+const outputWrapper = document.getElementById('output-wrapper');
+outputWrapper.addEventListener('click',deleteEntry);
+
+const activateModal = () => {
+    let outputString = '';
+    outputString += `<div class="modal-wrapper">`;
+    outputString +=     `<div class="modal-subwrapper">`;
+    outputString +=         `<div class="modal"></div>`;
+    outputString +=         `<div class="modal-btn-wrapper">`;
+    outputString +=             `<button class="save-btn">Save</button>`;
+    outputString +=             `<button class="cancel-btn">Cancel</button>`;              
+    outputString +=         `</div>`;
+    outputString +=     `</div>`;
+    outputString += `</div>`;
+    writeToDom(outputString,'main-body');
+};
+
+const allEditBtns = document.getElementsByClassName('edit-btn');
+outputWrapper.addEventListener('click',activateModal);
+
+{/* <div class="modal-wrapper">
+<div class="modal-subwrapper">
+    <div class="modal"></div>
+    <div class="modal-btn-wrapper">
+        <button class="save-btn">Save</button>
+        <button class="cancel-btn">Cancel</button>                
+    </div>
+</div>
+</div> */}
+
 
 
 

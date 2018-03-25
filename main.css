@@ -70,6 +70,9 @@ button{
     max-width: 115px;
 }
 
+.submit-once{
+    color: green;
+}
 /*----------------- Output -----------------*/
 #output-wrapper{
     /* border: 2px solid black; */
@@ -101,10 +104,12 @@ button{
 }
 
 .card-p{
-    display: block;
     width: 90%;
     clear: both;
     text-indent: 0%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edit-btn,
@@ -119,5 +124,39 @@ button{
     right: 0;
     bottom: 0;
 }
+
+/*----------------- Modal -----------------*/
+.modal-wrapper{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(128, 128, 128, .5);
+    top: 0;
+    /* z-index: -1; */
+}
+
+.modal-subwrapper{
+    width: 60%;
+    margin: 100px auto;
+}
+
+.modal{
+    width: 100%;
+    height: 200px;
+    border:2px solid black;
+    border-radius: 8px;
+    background-color: white;
+    opacity: 1;
+}
+
+.modal-btn-wrapper{
+    text-align: right;
+}
+
+.save-btn,
+.cancel-btn{
+    display: inline;
+}
+
 
 
