@@ -123,34 +123,54 @@ const deleteEntry = (e) => {
 //attached the event listener to the parent of all output buttons
 //becuase if attach it to the button itself, the newly added output will NOT be having event listener.
 const outputWrapper = document.getElementById('output-wrapper');
-outputWrapper.addEventListener('click',deleteEntry);
+outputWrapper.addEventListener('click',(e)=>{
+    if(e.target.classList[0] === 'delete-btn'){
+        deleteEntry(e);
+    }
+    else if(e.target.classList[0] === 'edit-btn'){
+        activateModal(e);
+    }
+});
 
-const activateModal = () => {
+const activateModal = (e) => {
     let outputString = '';
-    outputString += `<div class="modal-wrapper">`;
+    outputString += `<div id="modal-wrapper">`;
     outputString +=     `<div class="modal-subwrapper">`;
     outputString +=         `<div class="modal"></div>`;
     outputString +=         `<div class="modal-btn-wrapper">`;
-    outputString +=             `<button class="save-btn">Save</button>`;
-    outputString +=             `<button class="cancel-btn">Cancel</button>`;              
+    outputString +=             `<button id="save-btn">Save</button>`;
+    outputString +=             `<button id="cancel-btn">Cancel</button>`;              
     outputString +=         `</div>`;
     outputString +=     `</div>`;
     outputString += `</div>`;
-    writeToDom(outputString,'main-body');
+
+    if(e.target.classList[0] === 'edit-btn'){
+        writeToDom(outputString,'main-body');
+    }
+    
+    //attach event listener after the elements are generated
+    const modalWrapper = document.getElementById('modal-wrapper');
+    modalWrapper.addEventListener('click',(e)=>{
+        if(e.target.id === 'cancel-btn'){
+            cancelModal(e);
+        }
+    });
+
 };
 
-const allEditBtns = document.getElementsByClassName('edit-btn');
-outputWrapper.addEventListener('click',activateModal);
+const cancelModal = (e) => {
+    const elementToRemove = document.getElementById('modal-wrapper');
+    const modalWrapper = elementToRemove.parentNode; 
+    if(e.target.id === 'cancel-btn'){
+        modalWrapper.removeChild(elementToRemove);
+    }
+};
 
-{/* <div class="modal-wrapper">
-<div class="modal-subwrapper">
-    <div class="modal"></div>
-    <div class="modal-btn-wrapper">
-        <button class="save-btn">Save</button>
-        <button class="cancel-btn">Cancel</button>                
-    </div>
-</div>
-</div> */}
+
+
+
+
+
 
 
 
