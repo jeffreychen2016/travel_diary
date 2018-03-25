@@ -35,6 +35,10 @@ const writeToDom = (string,id) => {
     document.getElementById(id).innerHTML += string;
 }
 
+const truncateText = (string,start,length) => {
+    return string.substring(start,length) + '...';
+}
+
 const createCards = (travel_diary) => {
     let cards = '';
     for(let i = 0; i < travel_diary.length; i++){
@@ -42,7 +46,7 @@ const createCards = (travel_diary) => {
         cards +=    `<h2>${travel_diary[i].location}</h2>`;
         cards +=    `<img src="${travel_diary[i].path}" alt="${travel_diary[i].location}" class="location-img">`;
         cards +=    `<div class="description">`;
-        cards +=        `<p>${travel_diary[i].description}</p>`;
+        cards +=        `<p>${truncateText(travel_diary[i].description,0,150)}</p>`;
         cards +=    `</div>`;
         cards +=    `<textarea cols="30" rows="7"></textarea>`;
         cards +=    `<button class="submit-btn">Submit</button>`;
