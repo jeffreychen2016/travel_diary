@@ -56,8 +56,6 @@ const createCards = (travel_diary) => {
     writeToDom(cards,'card-holder');
 }
 
-createCards(travel_diary);
-
 const getTimeStamp = () => {
     let today = new Date();
     let ss = today.getSeconds();
@@ -97,25 +95,27 @@ const clearInput = (e) => {
     e.target.parentNode.childNodes[3].value = '';
 }
 
-const allSubmitBtns = document.getElementsByClassName('submit-btn');
-for(let i = 0; i < allSubmitBtns.length; i++){
-    allSubmitBtns[i].addEventListener('click',(e)=>{
-        let userInput = getUserInput(e.target,3);
-        let cardLocation = getCardLocation(e.target,0);
-        let outputString = '';
-        outputString += `<div class='output'>`;
-        outputString +=     `<h2 class='card-location'>${cardLocation}</h2>`;
-        outputString +=     `<h2 class='card-time'>${getTimeStamp()}</h2>`;
-        outputString +=     `<p class='card-p'>${userInput}</p>`;
-        outputString +=     `<div class='output-btn-wrapper'>`;
-        outputString +=         `<button class='edit-btn'>Edit</button>`;
-        outputString +=         `<button class='delete-btn'>Delete</button>`;
-        outputString +=     `</div>`;
-        outputString += `</div>`;
-        writeToDom(outputString,'output-wrapper');
-        changeColor(e);
-        clearInput(e);
-    });
+const attachEventListenerToSubmit = ()=>{
+    const allSubmitBtns = document.getElementsByClassName('submit-btn');
+    for(let i = 0; i < allSubmitBtns.length; i++){
+        allSubmitBtns[i].addEventListener('click',(e)=>{
+            let userInput = getUserInput(e.target,3);
+            let cardLocation = getCardLocation(e.target,0);
+            let outputString = '';
+            outputString += `<div class='output'>`;
+            outputString +=     `<h2 class='card-location'>${cardLocation}</h2>`;
+            outputString +=     `<h4 class='card-time'>${getTimeStamp()}</h4>`;
+            outputString +=     `<p class='card-p'>${userInput}</p>`;
+            outputString +=     `<div class='output-btn-wrapper'>`;
+            outputString +=         `<button class='edit-btn'>Edit</button>`;
+            outputString +=         `<button class='delete-btn'>Delete</button>`;
+            outputString +=     `</div>`;
+            outputString += `</div>`;
+            writeToDom(outputString,'output-wrapper');
+            changeColor(e);
+            clearInput(e);
+        });
+    }
 }
 
 const deleteEntry = (e) => {
@@ -125,15 +125,28 @@ const deleteEntry = (e) => {
 
 //attached the event listener to the parent of all output buttons
 //becuase if attach it to the button itself, the newly added output will NOT be having event listener.
-const outputWrapper = document.getElementById('output-wrapper');
-outputWrapper.addEventListener('click',(e)=>{
-    if(e.target.classList[0] === 'delete-btn'){
-        deleteEntry(e);
-    }
-    else if(e.target.classList[0] === 'edit-btn'){
-        activateModal(e);
-    }
-});
+const attachEventListenerToOutputWrapper = () =>{
+    const outputWrapper = document.getElementById('output-wrapper');
+    outputWrapper.addEventListener('click',(e)=>{
+        if(e.target.classList[0] === 'delete-btn'){
+            deleteEntry(e);
+        }
+        else if(e.target.classList[0] === 'edit-btn'){
+            activateModal(e);
+        }
+    });
+}
+
+const cancelModal = (e) => {
+    const elementToRemove = document.getElementById('modal-wrapper');
+    const modalWrapper = elementToRemove.parentNode; 
+    modalWrapper.removeChild(elementToRemove);
+};
+
+const saveChange = () => {
+    let changedText = document.getElementById('modal').value;
+    return changedText;
+};
 
 const activateModal = (editBtnClick) => {
     let textToBeModified = editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML;
@@ -163,17 +176,13 @@ const activateModal = (editBtnClick) => {
     });
 };
 
-const cancelModal = (e) => {
-    const elementToRemove = document.getElementById('modal-wrapper');
-    const modalWrapper = elementToRemove.parentNode; 
-    modalWrapper.removeChild(elementToRemove);
-};
+const applicationRun = ()=>{
+    createCards(travel_diary);
+    attachEventListenerToSubmit(); 
+    attachEventListenerToOutputWrapper();
+}
 
-const saveChange = () => {
-    let changedText = document.getElementById('modal').value;
-    return changedText;
-};
-
+applicationRun();
 
 
 
