@@ -93,6 +93,10 @@ const changeColor = (e) => {
     title.classList.add('submit-once');
 }
 
+const clearInput = (e) => {
+    e.target.parentNode.childNodes[3].value = '';
+}
+
 const allSubmitBtns = document.getElementsByClassName('submit-btn');
 for(let i = 0; i < allSubmitBtns.length; i++){
     allSubmitBtns[i].addEventListener('click',(e)=>{
@@ -110,6 +114,7 @@ for(let i = 0; i < allSubmitBtns.length; i++){
         outputString += `</div>`;
         writeToDom(outputString,'output-wrapper');
         changeColor(e);
+        clearInput(e);
     });
 }
 
@@ -152,7 +157,7 @@ const activateModal = (editBtnClick) => {
             cancelModal(e); 
         }
         else if(e.target.id === 'save-btn'){
-            editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML = saveChange(e);
+            editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML = saveChange();
             cancelModal(e);
         }
     });
@@ -164,7 +169,7 @@ const cancelModal = (e) => {
     modalWrapper.removeChild(elementToRemove);
 };
 
-const saveChange = (textToBeModified) => {
+const saveChange = () => {
     let changedText = document.getElementById('modal').value;
     return changedText;
 };
