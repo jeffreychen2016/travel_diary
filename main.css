@@ -70,6 +70,9 @@ button{
     max-width: 115px;
 }
 
+.submit-once{
+    color: green;
+}
 /*----------------- Output -----------------*/
 #output-wrapper{
     /* border: 2px solid black; */
@@ -101,10 +104,12 @@ button{
 }
 
 .card-p{
-    display: block;
     width: 90%;
     clear: both;
     text-indent: 0%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .edit-btn,

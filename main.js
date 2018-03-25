@@ -84,6 +84,11 @@ const getCardLocation = (target,index) => {
     return cardLocation;
 }
 
+const changeColor = (e) => {
+    let title = e.target.parentNode.childNodes[0];
+    title.classList.add('submit-once');
+}
+
 const allSubmitBtns = document.getElementsByClassName('submit-btn');
 for(let i = 0; i < allSubmitBtns.length; i++){
     allSubmitBtns[i].addEventListener('click',(e)=>{
@@ -100,6 +105,7 @@ for(let i = 0; i < allSubmitBtns.length; i++){
         outputString +=     `</div>`;
         outputString += `</div>`;
         writeToDom(outputString,'output-wrapper');
+        changeColor(e);
     });
 }
 
@@ -110,11 +116,12 @@ const deleteEntry = (e) => {
     }
 }
 
-
 //attached the event listener to the parent of all output buttons
 //becuase if attach it to the button itself, the newly added output will NOT be having event listener.
 const outputWrapper = document.getElementById('output-wrapper');
 outputWrapper.addEventListener('click',deleteEntry);
+
+
 
 
 
