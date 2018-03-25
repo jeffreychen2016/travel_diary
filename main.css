@@ -31,6 +31,7 @@ h1{
 
 .card{
     width: 30%;
+    min-width: 300px;
     height: 400px;
     border: 2px black solid;
     border-radius: 8px; 
@@ -68,6 +69,7 @@ button{
     width: 30%;
     height: 30px;
     max-width: 115px;
+    min-width: 45px;
 }
 
 .submit-once{
@@ -99,8 +101,10 @@ button{
 .card-time{
     text-align: right;
     display: block;
-    width: 40%;
+    width:58%;
     float: right;
+    line-height: 28px;
+
 }
 
 .card-p{
@@ -118,7 +122,7 @@ button{
 }
 
 .output-btn-wrapper{
-    width: 30%;
+    width: 100%;
     text-align: right;
     position: absolute;
     right: 0;
