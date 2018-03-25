@@ -130,12 +130,12 @@ outputWrapper.addEventListener('click',(e)=>{
     }
 });
 
-const activateModal = (e) => {
-    let textToBeModified = e.target.parentNode.parentNode.childNodes[2].innerHTML;
+const activateModal = (editBtnClick) => {
+    let textToBeModified = editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML;
     let outputStringModal = '';
     outputStringModal += `<div id="modal-wrapper">`;
     outputStringModal +=     `<div class="modal-subwrapper">`;
-    outputStringModal +=         `<textarea class="modal">${textToBeModified}</textarea>`;
+    outputStringModal +=         `<textarea id="modal">${textToBeModified}</textarea>`;
     outputStringModal +=         `<div class="modal-btn-wrapper">`;
     outputStringModal +=             `<button id="save-btn">Save</button>`;
     outputStringModal +=             `<button id="cancel-btn">Cancel</button>`;              
@@ -151,6 +151,10 @@ const activateModal = (e) => {
         if(e.target.id === 'cancel-btn'){
             cancelModal(e); 
         }
+        else if(e.target.id === 'save-btn'){
+            editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML = saveChange(e);
+            cancelModal(e);
+        }
     });
 };
 
@@ -158,6 +162,11 @@ const cancelModal = (e) => {
     const elementToRemove = document.getElementById('modal-wrapper');
     const modalWrapper = elementToRemove.parentNode; 
     modalWrapper.removeChild(elementToRemove);
+};
+
+const saveChange = (textToBeModified) => {
+    let changedText = document.getElementById('modal').value;
+    return changedText;
 };
 
 
