@@ -115,9 +115,7 @@ for(let i = 0; i < allSubmitBtns.length; i++){
 
 const deleteEntry = (e) => {
     let outputBox = e.target.parentNode.parentNode;
-    if(e.target.classList[0] === 'delete-btn'){
-        outputBox.style.display = 'none'; 
-    }
+    outputBox.style.display = 'none'; 
 }
 
 //attached the event listener to the parent of all output buttons
@@ -133,20 +131,19 @@ outputWrapper.addEventListener('click',(e)=>{
 });
 
 const activateModal = (e) => {
-    let outputString = '';
-    outputString += `<div id="modal-wrapper">`;
-    outputString +=     `<div class="modal-subwrapper">`;
-    outputString +=         `<div class="modal"></div>`;
-    outputString +=         `<div class="modal-btn-wrapper">`;
-    outputString +=             `<button id="save-btn">Save</button>`;
-    outputString +=             `<button id="cancel-btn">Cancel</button>`;              
-    outputString +=         `</div>`;
-    outputString +=     `</div>`;
-    outputString += `</div>`;
+    let textToBeModified = e.target.parentNode.parentNode.childNodes[2].innerHTML;
+    let outputStringModal = '';
+    outputStringModal += `<div id="modal-wrapper">`;
+    outputStringModal +=     `<div class="modal-subwrapper">`;
+    outputStringModal +=         `<textarea class="modal">${textToBeModified}</textarea>`;
+    outputStringModal +=         `<div class="modal-btn-wrapper">`;
+    outputStringModal +=             `<button id="save-btn">Save</button>`;
+    outputStringModal +=             `<button id="cancel-btn">Cancel</button>`;              
+    outputStringModal +=         `</div>`;
+    outputStringModal +=     `</div>`;
+    outputStringModal += `</div>`;
 
-    if(e.target.classList[0] === 'edit-btn'){
-        writeToDom(outputString,'main-body');
-    }
+    writeToDom(outputStringModal,'modal-holder');
     
     //attach event listener after the elements are generated
     const modalWrapper = document.getElementById('modal-wrapper');
@@ -155,15 +152,12 @@ const activateModal = (e) => {
             cancelModal(e); 
         }
     });
-
 };
 
 const cancelModal = (e) => {
     const elementToRemove = document.getElementById('modal-wrapper');
     const modalWrapper = elementToRemove.parentNode; 
-    if(e.target.id === 'cancel-btn'){
-        modalWrapper.removeChild(elementToRemove);
-    }
+    modalWrapper.removeChild(elementToRemove);
 };
 
 
