@@ -152,7 +152,7 @@ const activateModal = (e) => {
     const modalWrapper = document.getElementById('modal-wrapper');
     modalWrapper.addEventListener('click',(e)=>{
         if(e.target.id === 'cancel-btn'){
-            cancelModal(e);
+            cancelModal(e); 
         }
     });
 
