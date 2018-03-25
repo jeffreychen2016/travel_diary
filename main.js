@@ -125,8 +125,32 @@ const deleteEntry = (e) => {
 const outputWrapper = document.getElementById('output-wrapper');
 outputWrapper.addEventListener('click',deleteEntry);
 
+const activateModal = () => {
+    let outputString = '';
+    outputString += `<div class="modal-wrapper">`;
+    outputString +=     `<div class="modal-subwrapper">`;
+    outputString +=         `<div class="modal"></div>`;
+    outputString +=         `<div class="modal-btn-wrapper">`;
+    outputString +=             `<button class="save-btn">Save</button>`;
+    outputString +=             `<button class="cancel-btn">Cancel</button>`;              
+    outputString +=         `</div>`;
+    outputString +=     `</div>`;
+    outputString += `</div>`;
+    writeToDom(outputString,'main-body');
+};
 
+const allEditBtns = document.getElementsByClassName('edit-btn');
+outputWrapper.addEventListener('click',activateModal);
 
+{/* <div class="modal-wrapper">
+<div class="modal-subwrapper">
+    <div class="modal"></div>
+    <div class="modal-btn-wrapper">
+        <button class="save-btn">Save</button>
+        <button class="cancel-btn">Cancel</button>                
+    </div>
+</div>
+</div> */}
 
 
 
