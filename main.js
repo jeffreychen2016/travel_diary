@@ -151,10 +151,16 @@ const cancelModal = (e) => {
     modalWrapper.removeChild(elementToRemove);
 };
 
+const updateTimeUponSave = () => {
+    let editTime = getTimeStamp();
+    return editTime;
+}
+
 const saveChange = () => {
     let changedText = document.getElementById('modal').value;
     return changedText;
 };
+
 
 const activateModal = (editBtnClick) => {
     let textToBeModified = editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML;
@@ -179,6 +185,7 @@ const activateModal = (editBtnClick) => {
         }
         else if(e.target.id === 'save-btn'){
             editBtnClick.target.parentNode.parentNode.childNodes[2].innerHTML = saveChange();
+            editBtnClick.target.parentNode.parentNode.childNodes[1].innerHTML = updateTimeUponSave();
             cancelModal(e);
         }
     });
