@@ -95,6 +95,16 @@ const clearInput = (e) => {
     e.target.parentNode.childNodes[3].value = '';
 }
 
+const invalidInputAlert = (userInput,outputString,e) => {
+    if(userInput == ''){
+        alert('Please type in something!');
+    }else{
+        writeToDom(outputString,'output-wrapper');
+        changeColor(e);
+        clearInput(e);
+    }
+}
+
 const attachEventListenerToSubmit = ()=>{
     const allSubmitBtns = document.getElementsByClassName('submit-btn');
     for(let i = 0; i < allSubmitBtns.length; i++){
@@ -111,9 +121,7 @@ const attachEventListenerToSubmit = ()=>{
             outputString +=         `<button class='delete-btn'>Delete</button>`;
             outputString +=     `</div>`;
             outputString += `</div>`;
-            writeToDom(outputString,'output-wrapper');
-            changeColor(e);
-            clearInput(e);
+            invalidInputAlert(userInput,outputString,e);
         });
     }
 }
